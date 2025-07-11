@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour
 {
     [SerializeField] protected int maxHp = 1;
-    protected int currentHp;
+    [SerializeField] protected int currentHp;
     
     protected void Awake()
     {

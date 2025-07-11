@@ -7,14 +7,13 @@ using UnityEngine.Serialization;
 
 public class PlayerManager : Entity
 {
-    
     [SerializeField] private Rigidbody2D _player;
     [SerializeField] private Animator _animator;
     
-    [SerializeField] private float attackRangeHigh = 1;
-    [SerializeField] private float attackRangeWidth = 1;
-    [SerializeField] private float moveSpeed = 3;
-    [SerializeField] private float jumpPower = 650;
+    [SerializeField] private float _attackRangeHigh = 1;
+    [SerializeField] private float _attackRangeWidth = 1;
+    [SerializeField] private float _moveSpeed = 3;
+    [SerializeField] private float _jumpPower = 650;
 
     [SerializeField] private Collider2D _attackDamageCollider;
     
@@ -25,12 +24,14 @@ public class PlayerManager : Entity
         , Attack
         , Jump
         , Hit
+        , Death
     }
     
-    [SerializeField] private Vector2 playerMoveVelocity;
-    [SerializeField] private PlayerState currentState  = PlayerState.Idle;
+    [SerializeField] private Vector2 _playerMoveVelocity;
+    [SerializeField] private PlayerState _currentState  = PlayerState.Idle;
 
-    [SerializeField] public bool canJump = true;
+    [SerializeField] private bool _canJump = true;
+    [SerializeField] private bool _isHit = false;
 
     void Start()
     {
@@ -48,10 +49,10 @@ public class PlayerManager : Entity
     
     void Update()
     {
-        if (currentState == PlayerState.Jump)
+        if (_currentState == PlayerState.Jump)
         {
-            canJump = false;
-            currentState = PlayerState.Jump;
+            _canJump = false;
+            _currentState = PlayerState.Jump;
             if (_player.velocity.y > 0)
             {
                 Debug.Log("점프 중");
@@ -69,24 +70,26 @@ public class PlayerManager : Entity
 
     private void randing()
     {
-        if (currentState == PlayerState.Hit) return;
-        if (currentState != PlayerState.Jump) return;
+        if (_currentState == PlayerState.Death) return;
+        if (_currentState == PlayerState.Hit) return;
+        if (_currentState != PlayerState.Jump) return;
         
         Debug.Log("점프 할 수 있게 됨");
         Debug.Log(Time.frameCount);
         
-        currentState = PlayerState.Idle;
+        _currentState = PlayerState.Idle;
         _animator.Play("Idle");
-        canJump = true;
+        _canJump = true;
     }
 
     void OnAttackEvent()
     {
-        if (currentState == PlayerState.Hit) return;
-        if (currentState == PlayerState.Jump) return;
+        if (_currentState == PlayerState.Death) return;
+        if (_currentState == PlayerState.Hit) return;
+        if (_currentState == PlayerState.Jump) return;
         
         
-        currentState = PlayerState.Attack;
+        _currentState = PlayerState.Attack;
         
         _animator.Play("Dash-Attack");
     }
@@ -98,39 +101,42 @@ public class PlayerManager : Entity
 
     void OnJumpEvent()
     {
-        if (currentState == PlayerState.Hit) return;
-        if (currentState == PlayerState.Attack) return;
-        if (!canJump) return;
+        if (_currentState == PlayerState.Death) return;
+        if (_currentState == PlayerState.Hit) return;
+        if (_currentState == PlayerState.Attack) return;
+        if (!_canJump) return;
         
-        currentState = PlayerState.Jump;
-        canJump = false;
+        _currentState = PlayerState.Jump;
+        _canJump = false;
 
-        PlayerMoveHandler.instance.PhysicsToJump(jumpPower);
+        PlayerMoveHandler.instance.PhysicsToJump(_jumpPower);
         
         _animator.Play("jump");
     }
 
     void OnMoveEvent(int __direction)
     {
-        if (currentState == PlayerState.Hit) return;
-        if (currentState == PlayerState.Attack) return;
+        if (_currentState == PlayerState.Death) return;
+        if (_currentState == PlayerState.Hit) return;
+        if (_currentState == PlayerState.Attack) return;
         
-        playerMoveVelocity = new Vector2(__direction * moveSpeed, 0);
-        PlayerMoveHandler.instance.PhysicsToMove(__direction * moveSpeed);
+        _playerMoveVelocity = new Vector2(__direction * _moveSpeed, 0);
+        PlayerMoveHandler.instance.PhysicsToMove(__direction * _moveSpeed);
         
-        if (currentState == PlayerState.Jump) return;
+        if (_currentState == PlayerState.Jump) return;
         
-         currentState = PlayerState.Move;
+         _currentState = PlayerState.Move;
         _animator.Play("Run");
     }
 
     void OnIdleEvent()
     {
-        if (currentState == PlayerState.Hit) return;
-        if (currentState != PlayerState.Move) return;
+        if (_currentState == PlayerState.Death) return;
+        if (_currentState == PlayerState.Hit) return;
+        if (_currentState != PlayerState.Move) return;
         
-        currentState = PlayerState.Idle;
-        canJump = true;
+        _currentState = PlayerState.Idle;
+        _canJump = true;
 
         PlayerMoveHandler.instance.PhysicsToIdle();
         _animator.Play("Idle");
@@ -138,16 +144,34 @@ public class PlayerManager : Entity
     
     public override void OnHitEvent(int damage)
     {
-        
+        _animator.Play("Hurt");
+        _currentState = PlayerState.Hit;
+
+         currentHp -= damage;
+        _isHit = true;
+
+        if (currentHp <= 0)
+        {
+            _animator.Play("Death");
+            _currentState = PlayerState.Death;
+        }
+    }
+
+    public void EndHit()
+    {
+        _animator.Play("Idle");
+
+        _currentState = PlayerState.Idle;
+        _isHit = false;
     }
 
     public void SetStateIdle()
     {
         Debug.Log("SetStateIdle");
-        currentState = PlayerState.Idle;
+        _currentState = PlayerState.Idle;
         
         _attackDamageCollider.enabled = false;
-        canJump = true;
+        _canJump = true;
     }
     
 

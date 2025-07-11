@@ -50,10 +50,10 @@
     <Compile Include="Assets/Scripts/RunTime/CameraMove.cs" />
     <Compile Include="Assets/Scripts/Interface/Singleton.cs" />
     <Compile Include="Assets/Scripts/Classys/Entity.cs" />
+    <Compile Include="Assets/Scripts/RunTime/Player/PlayerAnimationEventHandler.cs" />
     <Compile Include="Assets/Scripts/RunTime/Player/PlayerManager.cs" />
     <Compile Include="Assets/Scripts/Classys/Enemy.cs" />
     <Compile Include="Assets/Scripts/RunTime/Player/PlayerInputHandler.cs" />
-    <Compile Include="Assets/Scripts/RunTime/Player/PlayerAnimationHandler.cs" />
     <Compile Include="Assets/Scripts/RunTime/Player/SensingIsGroundToPlayer.cs" />
     <Compile Include="Assets/Scripts/RunTime/Player/PlayerMoveHandler.cs" />
     <None Include="Assets/Externals/Warrior free set/License.txt" />

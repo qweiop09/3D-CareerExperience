@@ -64,11 +64,16 @@ public class Mushroom : Enemy
     
     public override void OnHitEvent(int damage)
     {
+        if (currentHp <= 0)
+        {
+            return;
+        }
+        
         Debug.Log("아얏");
         currentHp -= damage;
 
         _isHit = true;
-
+        
         if (currentHp <= 0)
         {
             _animator.Play("MushRoomDeath");
@@ -77,6 +82,8 @@ public class Mushroom : Enemy
         }
         
         _animator.Play("MushRoomHit");
+        
+        
     }
 
     public void OnDeath()
