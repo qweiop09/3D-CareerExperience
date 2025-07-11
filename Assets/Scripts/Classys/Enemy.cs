@@ -5,13 +5,12 @@ using UnityEngine;
 
 public abstract class Enemy : Entity
 {
-    [SerializeField] protected int maxHp = 1;
-     protected int currentHp;
-    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float _moveSpeed;
+    protected bool _isHit = false;
 
     protected void Awake()
     {
-        currentHp = maxHp;
+        base.Awake();
     }
 
     public abstract void Move();

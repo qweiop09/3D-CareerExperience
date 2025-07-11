@@ -35,17 +35,6 @@ public class PlayerMoveHandler : Singleton<PlayerMoveHandler>
         // 정지 인식
         _player.velocity = new Vector2(0, _player.velocity.y);
     }
-            
-        
-        
-        
-        
-        
-       
-        
-        
-        
-        
-        
+    
     
 }

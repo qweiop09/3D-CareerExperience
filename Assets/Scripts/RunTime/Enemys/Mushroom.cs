@@ -26,10 +26,22 @@ public class Mushroom : Enemy
         Move();
     }
 
-
     public override void Move()
     {
-        RaycastHit2D[] __rayHits = Physics2D.RaycastAll(transform.position - new Vector3(0,1f, 0), new Vector2(_direction, 0), 1.5f, ~(1 << LayerMask.NameToLayer("Entity")));
+        if (_isHit)
+        {
+            _rigidbody.velocity = Vector2.zero;
+
+            return;
+        }
+        
+        RaycastHit2D[] __rayHits = Physics2D.RaycastAll(
+            transform.position - new Vector3(0, 1f, 0),
+            new Vector2(_direction, 0),
+            1.5f,
+            ~(LayerMask.GetMask("Entity", "DamageCollider"))
+        );
+        
         Debug.DrawRay(transform.position - new Vector3(0,1f, 0), new Vector2(_direction * 1.5f, 0), Color.red);
         
         foreach (var ___rayHit  in __rayHits)
@@ -44,16 +56,37 @@ public class Mushroom : Enemy
             }
         }
         
-        _rigidbody.velocity = new Vector2(_direction * moveSpeed, 0);
+        _rigidbody.velocity = new Vector2(_direction * _moveSpeed, 0);
         transform.rotation =  Quaternion.Euler(new Vector3(0, 90 - 90 * _direction, 0));
 
         _animator.Play("MushRoomMove");
     }
     
-    public override void OnHitEvent()
+    public override void OnHitEvent(int damage)
     {
+        Debug.Log("아얏");
+        currentHp -= damage;
+
+        _isHit = true;
+
+        if (currentHp <= 0)
+        {
+            _animator.Play("MushRoomDeath");
+            
+            return;
+        }
         
+        _animator.Play("MushRoomHit");
     }
 
+    public void OnDeath()
+    {
+        Destroy(gameObject);
+    }
+
+    public void NotIsHit()
+    {
+        _isHit = false;
+    }
     
 }

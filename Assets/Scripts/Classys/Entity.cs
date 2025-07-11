@@ -4,5 +4,13 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {
-    public abstract void OnHitEvent();
+    [SerializeField] protected int maxHp = 1;
+    protected int currentHp;
+    
+    protected void Awake()
+    {
+        currentHp = maxHp;
+    }
+    
+    public abstract void OnHitEvent(int damage);
 }

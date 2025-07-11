@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerManager : Entity
 {
@@ -14,6 +15,8 @@ public class PlayerManager : Entity
     [SerializeField] private float attackRangeWidth = 1;
     [SerializeField] private float moveSpeed = 3;
     [SerializeField] private float jumpPower = 650;
+
+    [SerializeField] private Collider2D _attackDamageCollider;
     
     public enum PlayerState
     {
@@ -66,6 +69,7 @@ public class PlayerManager : Entity
 
     private void randing()
     {
+        if (currentState == PlayerState.Hit) return;
         if (currentState != PlayerState.Jump) return;
         
         Debug.Log("점프 할 수 있게 됨");
@@ -78,15 +82,23 @@ public class PlayerManager : Entity
 
     void OnAttackEvent()
     {
+        if (currentState == PlayerState.Hit) return;
         if (currentState == PlayerState.Jump) return;
+        
         
         currentState = PlayerState.Attack;
         
         _animator.Play("Dash-Attack");
     }
 
+    public void OnAttackDamageCollider()
+    {
+        _attackDamageCollider.enabled = true;
+    }
+
     void OnJumpEvent()
     {
+        if (currentState == PlayerState.Hit) return;
         if (currentState == PlayerState.Attack) return;
         if (!canJump) return;
         
@@ -100,6 +112,7 @@ public class PlayerManager : Entity
 
     void OnMoveEvent(int __direction)
     {
+        if (currentState == PlayerState.Hit) return;
         if (currentState == PlayerState.Attack) return;
         
         playerMoveVelocity = new Vector2(__direction * moveSpeed, 0);
@@ -113,6 +126,7 @@ public class PlayerManager : Entity
 
     void OnIdleEvent()
     {
+        if (currentState == PlayerState.Hit) return;
         if (currentState != PlayerState.Move) return;
         
         currentState = PlayerState.Idle;
@@ -122,7 +136,7 @@ public class PlayerManager : Entity
         _animator.Play("Idle");
     }
     
-    public override void OnHitEvent()
+    public override void OnHitEvent(int damage)
     {
         
     }
@@ -131,6 +145,8 @@ public class PlayerManager : Entity
     {
         Debug.Log("SetStateIdle");
         currentState = PlayerState.Idle;
+        
+        _attackDamageCollider.enabled = false;
         canJump = true;
     }
     
