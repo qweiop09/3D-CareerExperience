@@ -62,7 +62,7 @@ public class Mushroom : Enemy
         {
             if ( ___rayHit != null)
             {
-                Debug.Log("충돌한 것: " + ___rayHit.collider.name);
+                // Debug.Log("충돌한 것: " + ___rayHit.collider.name);
                 
                 _direction *= -1;
                 

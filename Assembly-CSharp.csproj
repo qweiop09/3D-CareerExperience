@@ -56,6 +56,7 @@
     <Compile Include="Assets/Scripts/RunTime/Player/PlayerInputHandler.cs" />
     <Compile Include="Assets/Scripts/RunTime/Player/SensingIsGroundToPlayer.cs" />
     <Compile Include="Assets/Scripts/RunTime/Player/PlayerMoveHandler.cs" />
+    <Compile Include="Assets/Scripts/RunTime/TileMaps/TrapTimeMapTakeDamage.cs" />
     <None Include="Assets/Externals/Gentlelands/Gentleland/SteampunkUI/Fonts/Environment Maps/cc0.txt" />
     <None Include="Assets/Externals/Gentlelands/Gentleland/SteampunkUI/ThirdPartyLicenses/RobotoSlab Font License.txt" />
     <None Include="Assets/Externals/Warrior free set/License.txt" />

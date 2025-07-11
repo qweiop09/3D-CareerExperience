@@ -149,6 +149,9 @@ public class PlayerManager : Entity
     
     public override void OnHitEvent(int damage)
     {
+        if (_currentState == PlayerState.Death) return;
+        if (_currentState == PlayerState.Hit) return;
+        
         _animator.Play("Hurt");
         _currentState = PlayerState.Hit;
 
