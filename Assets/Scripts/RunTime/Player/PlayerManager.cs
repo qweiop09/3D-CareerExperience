@@ -45,7 +45,6 @@ public class PlayerManager : Entity
     
     void Update()
     {
-        
         if (currentState == PlayerState.Jump)
         {
             canJump = false;
@@ -59,22 +58,6 @@ public class PlayerManager : Entity
             {
                 Debug.Log("떨어지는 중!");
                 _animator.Play("Fall");
-                
-                // RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, new Vector2(0, -1), 0.7f);
-                // Debug.DrawRay(transform.position, new Vector2(0,-1) * 0.7f, Color.red, 1f);
-                //
-                // foreach (RaycastHit2D hit in hits)
-                // {
-                //     if (hit.transform.CompareTag("ground"))
-                //     {
-                //         Debug.Log("착지함");
-                //         Debug.Log(Time.frameCount);
-                //
-                //         currentState = PlayerState.Idle;
-                //         _animator.Play("Idle");
-                //         canJump = true;
-                //     }
-                // }
             }
             
         }
@@ -95,6 +78,8 @@ public class PlayerManager : Entity
 
     void OnAttackEvent()
     {
+        if (currentState == PlayerState.Jump) return;
+        
         currentState = PlayerState.Attack;
         
         _animator.Play("Dash-Attack");

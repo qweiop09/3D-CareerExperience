@@ -9,6 +9,6 @@ public class CameraMove : MonoBehaviour
     void Update()
     {
         transform.position = Vector3.Lerp(transform.position, _targetPlayer.position, 0.1f)
-            - Vector3.forward;
+            - Vector3.forward + Vector3.up * 0.25f;
     }
 }
