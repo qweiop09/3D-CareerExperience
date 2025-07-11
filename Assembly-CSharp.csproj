@@ -45,10 +45,14 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.21f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/Scripts/PlayerManager.cs" />
-    <Compile Include="Assets/Scripts/PlayerAnimationHandler.cs" />
-    <Compile Include="Assets/Scripts/PlayerMoveHandler.cs" />
+    <Compile Include="Assets/Scripts/RunTime/CameraMove.cs" />
     <Compile Include="Assets/Scripts/Interface/Singleton.cs" />
+    <Compile Include="Assets/Scripts/Classys/Entity.cs" />
+    <Compile Include="Assets/Scripts/RunTime/Player/PlayerManager.cs" />
+    <Compile Include="Assets/Scripts/RunTime/Player/PlayerInputHandler.cs" />
+    <Compile Include="Assets/Scripts/RunTime/Player/PlayerAnimationHandler.cs" />
+    <Compile Include="Assets/Scripts/RunTime/Player/SensingIsGroundToPlayer.cs" />
+    <Compile Include="Assets/Scripts/RunTime/Player/PlayerMoveHandler.cs" />
     <None Include="Assets/Externals/Warrior free set/License.txt" />
     <None Include="Assets/Externals/Warrior free set/Contact.txt" />
     <Reference Include="UnityEngine">
