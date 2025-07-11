@@ -18,7 +18,6 @@ public class PlayerManager : Entity
     [SerializeField] private Vector3? _reSponePosition;
     
     [SerializeField] private Collider2D _attackDamageCollider;
-    [SerializeField] private Slider _hPVar;
     
     public enum PlayerState
     {
@@ -185,6 +184,7 @@ public class PlayerManager : Entity
         _isHit = false;
 
         SetHPVar();
+        HPvar.instance.SetSecondHPVar();
 
         _animator.Play("Idle");
         transform.position = (Vector3)_reSponePosition;
@@ -203,7 +203,7 @@ public class PlayerManager : Entity
 
     private void SetHPVar()
     {
-        _hPVar.value = (float)currentHp / maxHp;
+        HPvar.instance.SetHPVar( (float) currentHp / maxHp);
     }
     
 

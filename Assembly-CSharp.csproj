@@ -52,6 +52,7 @@
     <Compile Include="Assets/Scripts/Classys/Singleton.cs" />
     <Compile Include="Assets/Scripts/RunTime/Player/PlayerAnimationEventHandler.cs" />
     <Compile Include="Assets/Scripts/RunTime/Player/PlayerManager.cs" />
+    <Compile Include="Assets/Scripts/RunTime/UI/HPvar.cs" />
     <Compile Include="Assets/Scripts/Classys/Enemy.cs" />
     <Compile Include="Assets/Scripts/RunTime/Player/PlayerInputHandler.cs" />
     <Compile Include="Assets/Scripts/RunTime/Player/SensingIsGroundToPlayer.cs" />
