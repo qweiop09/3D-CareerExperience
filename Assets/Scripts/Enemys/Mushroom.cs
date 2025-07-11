@@ -8,13 +8,17 @@ using UnityEngine.Serialization;
 
 public class Mushroom : Enemy
 {
+    
     private Rigidbody2D _rigidbody;
     private Animator _animator;
 
     private SpriteRenderer _spriteRenderer;
 
     private Vector3 _reSponePosition;
-
+    
+    [Header("Mushroom State")]
+    [Space(10)]
+    
     [SerializeField] private Collider2D _damageCollider;
 
     private int _direction = 1;

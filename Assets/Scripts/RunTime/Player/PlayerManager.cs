@@ -8,17 +8,14 @@ using UnityEngine.UI;
 
 public class PlayerManager : Entity
 {
+    [Header("Player Manager")]
+    [Space(10)]
+    
     [SerializeField] private Rigidbody2D _player;
     [SerializeField] private Animator _animator;
     
-    [SerializeField] private float _attackRangeHigh = 1;
-    [SerializeField] private float _attackRangeWidth = 1;
-    [SerializeField] private float _moveSpeed = 3;
-    [SerializeField] private float _jumpPower = 650;
-    [SerializeField] private Vector3? _reSponePosition;
-    [SerializeField] private bool _isWallSticking = false;
-    
     [SerializeField] private Collider2D _attackDamageCollider;
+    private Vector3? _reSponePosition;
     
     public enum PlayerState
     {
@@ -29,14 +26,23 @@ public class PlayerManager : Entity
         , Hit
         , Death
     }
-
     public static event Action ReStart;
     
-    [SerializeField] private Vector2 _playerMoveVelocity;
+    [Header("Player Status")]
+    [Space(10)]
+    
+    [SerializeField] private float _moveSpeed = 3;
+    [SerializeField] private float _jumpPower = 650;
+    
+    [Header("Player State")]
+    [Space(10)]
+    
     [SerializeField] private PlayerState _currentState  = PlayerState.Idle;
+    private Vector2 _playerMoveVelocity;
     
     [SerializeField] private bool _canJump = true;
     [SerializeField] private bool _isHit = false;
+    [SerializeField] private bool _isWallSticking = false;
 
     void Start()
     {
@@ -57,6 +63,7 @@ public class PlayerManager : Entity
         {
             _canJump = false;
             _currentState = PlayerState.Jump;
+            
             if (_player.velocity.y > 0)
             {
                 _animator.Play("jump");
@@ -211,7 +218,7 @@ public class PlayerManager : Entity
         _isHit = false;
 
         SetHPVar();
-        HPvar.instance.SetSecondHPVar();
+        HPVar.instance.SetSecondHPVar();
 
         _animator.Play("Idle");
         transform.position = (Vector3)_reSponePosition;
@@ -229,7 +236,7 @@ public class PlayerManager : Entity
 
     private void SetHPVar()
     {
-        HPvar.instance.SetHPVar( (float) currentHp / maxHp);
+        HPVar.instance.SetHPVar( (float) currentHp / maxHp);
     }
     
 

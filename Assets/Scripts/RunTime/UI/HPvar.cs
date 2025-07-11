@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HPvar : Singleton<HPvar>
+public class HPVar : Singleton<HPVar>
 {
+    [Header("HPvar")]
+    [Space(10)]
     
     [SerializeField] private Slider _hPVar;
     [SerializeField] private Slider _secondHpVar;

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {
+    [Header("Entity Status")]
+    [Space(10)]
     [SerializeField] protected int maxHp = 1;
     [SerializeField] protected int currentHp;
     
