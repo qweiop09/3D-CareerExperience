@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class PlayerManager : Entity
 {
@@ -17,6 +18,7 @@ public class PlayerManager : Entity
     [SerializeField] private Vector3? _reSponePosition;
     
     [SerializeField] private Collider2D _attackDamageCollider;
+    [SerializeField] private Slider _hPVar;
     
     public enum PlayerState
     {
@@ -158,6 +160,8 @@ public class PlayerManager : Entity
          currentHp -= damage;
         _isHit = true;
 
+        SetHPVar();
+
         if (currentHp <= 0)
         {
             _animator.Play("Death");
@@ -180,6 +184,8 @@ public class PlayerManager : Entity
 
         _isHit = false;
 
+        SetHPVar();
+
         _animator.Play("Idle");
         transform.position = (Vector3)_reSponePosition;
         
@@ -193,6 +199,11 @@ public class PlayerManager : Entity
         
         _attackDamageCollider.enabled = false;
         _canJump = true;
+    }
+
+    private void SetHPVar()
+    {
+        _hPVar.value = (float)currentHp / maxHp;
     }
     
 
