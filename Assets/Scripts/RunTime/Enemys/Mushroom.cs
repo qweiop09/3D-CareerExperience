@@ -11,6 +11,10 @@ public class Mushroom : Enemy
     private Rigidbody2D _rigidbody;
     private Animator _animator;
 
+    private SpriteRenderer _spriteRenderer;
+
+    private Vector3 _reSponePosition;
+
     [SerializeField] private Collider2D _damageCollider;
 
     private int _direction = 1;
@@ -18,14 +22,21 @@ public class Mushroom : Enemy
     private void Awake()
     {
         base.Awake();
-
+        
         _rigidbody = transform.GetComponent<Rigidbody2D>();
         _animator = transform.GetComponent<Animator>();
+        _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         
+        _reSponePosition = transform.position;
+
+        PlayerManager.ReStart += ReSpone;
+
     }
 
     private void Update()
     {
+        if (_isDead) return;
+        
         Move();
     }
 
@@ -81,6 +92,8 @@ public class Mushroom : Enemy
         {
             _animator.Play("MushRoomDeath");
             _damageCollider.enabled = false;
+
+            _isDead = true;
             
             return;
         }
@@ -92,12 +105,27 @@ public class Mushroom : Enemy
 
     public void OnDeath()
     {
-        gameObject.SetActive(false);
+        _spriteRenderer.enabled = false;
     }
 
     public void NotIsHit()
     {
         _isHit = false;
+    }
+
+    private void ReSpone()
+    {
+        transform.position = _reSponePosition;
+
+        _spriteRenderer.enabled = true;
+        _damageCollider.enabled = true;
+        _isDead = false;
+        _isHit = false;
+        
+        currentHp = maxHp;
+
+        _direction = 1;
+
     }
     
 }

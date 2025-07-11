@@ -13,7 +13,11 @@ public class DamageCollider : MonoBehaviour
         
         if (__otherEntity != null)
         {
-            Debug.Log("전투진행 피격대상 : " + __other.name );
+            if (transform.CompareTag(__other.tag))
+            {
+                return;
+            }
+            
             __otherEntity.OnHitEvent(_damage);
         }
     }

@@ -15,7 +15,7 @@ public class PlayerManager : Entity
     [SerializeField] private float _moveSpeed = 3;
     [SerializeField] private float _jumpPower = 650;
     [SerializeField] private Vector3? _reSponePosition;
-
+    
     [SerializeField] private Collider2D _attackDamageCollider;
     
     public enum PlayerState
@@ -27,6 +27,8 @@ public class PlayerManager : Entity
         , Hit
         , Death
     }
+
+    public static event Action ReStart;
     
     [SerializeField] private Vector2 _playerMoveVelocity;
     [SerializeField] private PlayerState _currentState  = PlayerState.Idle;
@@ -177,6 +179,8 @@ public class PlayerManager : Entity
 
         _animator.Play("Idle");
         transform.position = (Vector3)_reSponePosition;
+        
+        ReStart.Invoke();
     }
 
     public void SetStateIdle()

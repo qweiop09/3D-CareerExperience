@@ -7,6 +7,7 @@ public abstract class Enemy : Entity
 {
     [SerializeField] protected float _moveSpeed;
     protected bool _isHit = false;
+    protected bool _isDead = false;
 
     protected void Awake()
     {
