@@ -14,6 +14,7 @@ public class PlayerManager : Entity
     [SerializeField] private float _attackRangeWidth = 1;
     [SerializeField] private float _moveSpeed = 3;
     [SerializeField] private float _jumpPower = 650;
+    [SerializeField] private Vector3? _reSponePosition;
 
     [SerializeField] private Collider2D _attackDamageCollider;
     
@@ -29,7 +30,7 @@ public class PlayerManager : Entity
     
     [SerializeField] private Vector2 _playerMoveVelocity;
     [SerializeField] private PlayerState _currentState  = PlayerState.Idle;
-
+    
     [SerializeField] private bool _canJump = true;
     [SerializeField] private bool _isHit = false;
 
@@ -44,6 +45,8 @@ public class PlayerManager : Entity
         SensingIsGroundToPlayer.sensedIsGround += randing;
         
         Debug.Log("널음");
+
+        if (_reSponePosition == null) _reSponePosition = _player.position;
     }
     
     
@@ -163,6 +166,17 @@ public class PlayerManager : Entity
 
         _currentState = PlayerState.Idle;
         _isHit = false;
+    }
+
+    public void ReSpone()
+    {
+        currentHp = maxHp;
+        _currentState = PlayerState.Idle;
+
+        _isHit = false;
+
+        _animator.Play("Idle");
+        transform.position = (Vector3)_reSponePosition;
     }
 
     public void SetStateIdle()

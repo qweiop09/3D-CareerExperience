@@ -4,18 +4,21 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Mushroom : Enemy
 {
     private Rigidbody2D _rigidbody;
     private Animator _animator;
 
+    [SerializeField] private Collider2D _damageCollider;
+
     private int _direction = 1;
 
     private void Awake()
     {
         base.Awake();
-        
+
         _rigidbody = transform.GetComponent<Rigidbody2D>();
         _animator = transform.GetComponent<Animator>();
         
@@ -77,6 +80,7 @@ public class Mushroom : Enemy
         if (currentHp <= 0)
         {
             _animator.Play("MushRoomDeath");
+            _damageCollider.enabled = false;
             
             return;
         }
@@ -88,7 +92,7 @@ public class Mushroom : Enemy
 
     public void OnDeath()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public void NotIsHit()

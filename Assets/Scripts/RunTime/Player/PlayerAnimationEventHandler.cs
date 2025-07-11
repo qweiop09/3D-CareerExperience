@@ -20,4 +20,9 @@ public class PlayerAnimationEventHandler : MonoBehaviour
     {
        _playerManager.OnAttackDamageCollider();
     }
+
+    public void ReSpone()
+    {
+        _playerManager.ReSpone();
+    }
 }
