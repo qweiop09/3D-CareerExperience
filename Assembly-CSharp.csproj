@@ -45,19 +45,19 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.21f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/Scripts/Enemys/Mushroom.cs" />
-    <Compile Include="Assets/Scripts/Classes/Singleton.cs" />
-    <Compile Include="Assets/Scripts/RunTime/CameraMove.cs" />
-    <Compile Include="Assets/Scripts/RunTime/UI/HPVar.cs" />
-    <Compile Include="Assets/Scripts/Classes/DamageCollider.cs" />
-    <Compile Include="Assets/Scripts/RunTime/Player/PlayerAnimationEventHandler.cs" />
-    <Compile Include="Assets/Scripts/RunTime/Player/PlayerManager.cs" />
-    <Compile Include="Assets/Scripts/Classes/Entity.cs" />
-    <Compile Include="Assets/Scripts/RunTime/Player/PlayerInputHandler.cs" />
-    <Compile Include="Assets/Scripts/Classes/Enemy.cs" />
-    <Compile Include="Assets/Scripts/RunTime/Player/SensingIsGroundToPlayer.cs" />
-    <Compile Include="Assets/Scripts/RunTime/Player/PlayerMoveHandler.cs" />
-    <Compile Include="Assets/Scripts/RunTime/TileMaps/TrapTimeMapTakeDamage.cs" />
+    <Compile Include="Assets/00_Scripts/Player/PlayerManager.cs" />
+    <Compile Include="Assets/00_Scripts/Player/PlayerAnimationEventHandler.cs" />
+    <Compile Include="Assets/00_Scripts/RunTime/UI/HPVar.cs" />
+    <Compile Include="Assets/00_Scripts/RunTime/TileMaps/TrapTimeMapTakeDamage.cs" />
+    <Compile Include="Assets/00_Scripts/Player/SensingIsGroundToPlayer.cs" />
+    <Compile Include="Assets/00_Scripts/Player/PlayerMoveHandler.cs" />
+    <Compile Include="Assets/00_Scripts/RunTime/CameraMove.cs" />
+    <Compile Include="Assets/00_Scripts/Classes/Singleton.cs" />
+    <Compile Include="Assets/00_Scripts/Player/PlayerInputHandler.cs" />
+    <Compile Include="Assets/00_Scripts/Classes/DamageCollider.cs" />
+    <Compile Include="Assets/00_Scripts/Classes/Entity.cs" />
+    <Compile Include="Assets/00_Scripts/Classes/Enemy.cs" />
+    <Compile Include="Assets/00_Scripts/Enemys/Mushroom.cs" />
     <None Include="Assets/Externals/Gentlelands/Gentleland/SteampunkUI/Fonts/Environment Maps/cc0.txt" />
     <None Include="Assets/Externals/Gentlelands/Gentleland/SteampunkUI/ThirdPartyLicenses/RobotoSlab Font License.txt" />
     <None Include="Assets/Externals/Warrior free set/License.txt" />

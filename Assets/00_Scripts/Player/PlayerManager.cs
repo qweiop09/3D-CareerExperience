@@ -76,13 +76,11 @@ public class PlayerManager : Entity
         
         if ( _currentState == PlayerState.Move)
         {
-            
             RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, -_player.transform.up, 1.2f);
             foreach (var hit in hits)
             {
                 if (hit.transform.CompareTag("ground"))
                 {
-                    Debug.Log("여긴 땅이야");
                     _isWallSticking = false;
                     return;
                 }
@@ -94,7 +92,6 @@ public class PlayerManager : Entity
                 if (hit.transform.CompareTag("ground"))
                 {
                     _isWallSticking = true;
-                    Debug.Log("여긴 땅이 아니여!!");
                     return;
                 }
             }
@@ -123,7 +120,7 @@ public class PlayerManager : Entity
         if (_currentState == PlayerState.Hit) return;
         if (_currentState == PlayerState.Jump) return;
         
-        
+        _player.velocity = new Vector2(0, _player.velocity.y);
         _currentState = PlayerState.Attack;
         
         _animator.Play("Dash-Attack");
@@ -141,6 +138,7 @@ public class PlayerManager : Entity
         if (_currentState == PlayerState.Attack) return;
         if (!_canJump) return;
         
+        _player.velocity = new Vector2(0, _player.velocity.y);
         _currentState = PlayerState.Jump;
         _canJump = false;
 
@@ -186,6 +184,8 @@ public class PlayerManager : Entity
     {
         if (_currentState == PlayerState.Death) return;
         if (_currentState == PlayerState.Hit) return;
+        
+        _player.velocity = new Vector2(0, _player.velocity.y);
         
         _animator.Play("Hurt");
         _currentState = PlayerState.Hit;
