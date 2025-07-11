@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class Enemy : Entity
 {
+    // [T]
+    
     [SerializeField] protected float _moveSpeed;
     protected bool _isHit = false;
     protected bool _isDead = false;

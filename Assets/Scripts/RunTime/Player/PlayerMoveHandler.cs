@@ -12,8 +12,6 @@ public class PlayerMoveHandler : Singleton<PlayerMoveHandler>
     public void PhysicsToJump(float __jumpPower)
     {
         // 점프 인식
-        Debug.Log("점뿌!!!!");
-        Debug.Log(Time.frameCount);
         _player.velocity = new Vector2(_player.velocity.x, 0);
         _player.AddForce(new Vector2(0, __jumpPower));
         

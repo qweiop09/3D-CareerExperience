@@ -24,7 +24,6 @@ public class TrapTimeMapTakeDamage : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D __other)
     {
         _elpsedTime = 0;
-        Debug.Log("안녕!!");
     }
 
     private void OnTriggerStay2D(Collider2D __other)
@@ -40,11 +39,9 @@ public class TrapTimeMapTakeDamage : MonoBehaviour
 
             if (_damageDelayTime <= _elpsedTime)
             {
-                Debug.Log("데미지 다시 입힌다!!");
                 _collider.enabled = false;
                 _elpsedTime = 0;
             }
-
         }
 
         else

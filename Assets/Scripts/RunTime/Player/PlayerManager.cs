@@ -16,6 +16,7 @@ public class PlayerManager : Entity
     [SerializeField] private float _moveSpeed = 3;
     [SerializeField] private float _jumpPower = 650;
     [SerializeField] private Vector3? _reSponePosition;
+    [SerializeField] private bool _isWallSticking = false;
     
     [SerializeField] private Collider2D _attackDamageCollider;
     
@@ -39,7 +40,6 @@ public class PlayerManager : Entity
 
     void Start()
     {
-        Debug.Log("널음1");
         PlayerInputHandler.instance.OnAttackEvent += OnAttackEvent;
         PlayerInputHandler.instance.OnJumpEvent += OnJumpEvent;
         PlayerInputHandler.instance.OnMoveEvent += OnMoveEvent;
@@ -47,8 +47,6 @@ public class PlayerManager : Entity
 
         SensingIsGroundToPlayer.sensedIsGround += randing;
         
-        Debug.Log("널음");
-
         if (_reSponePosition == null) _reSponePosition = _player.position;
     }
     
@@ -61,14 +59,40 @@ public class PlayerManager : Entity
             _currentState = PlayerState.Jump;
             if (_player.velocity.y > 0)
             {
-                Debug.Log("점프 중");
                 _animator.Play("jump");
             }
             else
             {
-                Debug.Log("떨어지는 중!");
                 _animator.Play("Fall");
             }
+        }
+        
+        if ( _currentState == PlayerState.Move)
+        {
+            
+            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, -_player.transform.up, 1.2f);
+            foreach (var hit in hits)
+            {
+                if (hit.transform.CompareTag("ground"))
+                {
+                    Debug.Log("여긴 땅이야");
+                    _isWallSticking = false;
+                    return;
+                }
+            }
+            
+            hits = Physics2D.RaycastAll(transform.position, _player.transform.right, 0.8f);
+            foreach (var hit in hits)
+            {
+                if (hit.transform.CompareTag("ground"))
+                {
+                    _isWallSticking = true;
+                    Debug.Log("여긴 땅이 아니여!!");
+                    return;
+                }
+            }
+
+            _isWallSticking = false;
             
         }
         
@@ -80,12 +104,10 @@ public class PlayerManager : Entity
         if (_currentState == PlayerState.Hit) return;
         if (_currentState != PlayerState.Jump) return;
         
-        Debug.Log("점프 할 수 있게 됨");
-        Debug.Log(Time.frameCount);
-        
         _currentState = PlayerState.Idle;
         _animator.Play("Idle");
         _canJump = true;
+        _isWallSticking = false;
     }
 
     void OnAttackEvent()
@@ -125,6 +147,11 @@ public class PlayerManager : Entity
         if (_currentState == PlayerState.Death) return;
         if (_currentState == PlayerState.Hit) return;
         if (_currentState == PlayerState.Attack) return;
+        if (_isWallSticking)
+        {
+            _player.velocity = new Vector2(0, _player.velocity.y);
+            return;
+        }
         
         _playerMoveVelocity = new Vector2(__direction * _moveSpeed, 0);
         PlayerMoveHandler.instance.PhysicsToMove(__direction * _moveSpeed);
@@ -194,7 +221,6 @@ public class PlayerManager : Entity
 
     public void SetStateIdle()
     {
-        Debug.Log("SetStateIdle");
         _currentState = PlayerState.Idle;
         
         _attackDamageCollider.enabled = false;

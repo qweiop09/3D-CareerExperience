@@ -16,7 +16,6 @@ public class PlayerInputHandler : Singleton<PlayerInputHandler>
         // 공격
         if (Input.GetMouseButtonDown(0))
         {
-            // Debug.Log("공격함");
             OnAttackEvent.Invoke();
             return;
         }
@@ -24,7 +23,6 @@ public class PlayerInputHandler : Singleton<PlayerInputHandler>
         // 점프
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // Debug.Log("점프함");
             OnJumpEvent.Invoke();
             return;
         }
@@ -32,12 +30,10 @@ public class PlayerInputHandler : Singleton<PlayerInputHandler>
         // 좌, 우 이동
         if (Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.D))
         {
-            // Debug.Log("달리기 함");
             OnMoveEvent.Invoke(Input.GetKey(KeyCode.A)? -1 : 1);
             return;
         }
         
-        // Debug.Log("대기함");
         OnIdleEvent?.Invoke();
         
         

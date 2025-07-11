@@ -21,7 +21,6 @@ public class HPvar : Singleton<HPvar>
     {
         if (_hPVar.value < _secondHpVar.value)
         {
-            Debug.Log("노란색 내려가는 중");
             _secondHpVar.value -= 0.01f;
         }
     }

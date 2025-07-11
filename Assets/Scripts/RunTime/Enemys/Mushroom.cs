@@ -62,8 +62,6 @@ public class Mushroom : Enemy
         {
             if ( ___rayHit != null)
             {
-                // Debug.Log("충돌한 것: " + ___rayHit.collider.name);
-                
                 _direction *= -1;
                 
                 break;
@@ -83,7 +81,6 @@ public class Mushroom : Enemy
             return;
         }
         
-        Debug.Log("아얏");
         currentHp -= damage;
 
         _isHit = true;
