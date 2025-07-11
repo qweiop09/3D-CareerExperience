@@ -56,7 +56,15 @@
     <Compile Include="Assets/Scripts/RunTime/Player/PlayerInputHandler.cs" />
     <Compile Include="Assets/Scripts/RunTime/Player/SensingIsGroundToPlayer.cs" />
     <Compile Include="Assets/Scripts/RunTime/Player/PlayerMoveHandler.cs" />
+    <None Include="Assets/Externals/Gentlelands/Gentleland/SteampunkUI/Fonts/Environment Maps/cc0.txt" />
+    <None Include="Assets/Externals/Gentlelands/Gentleland/SteampunkUI/ThirdPartyLicenses/RobotoSlab Font License.txt" />
     <None Include="Assets/Externals/Warrior free set/License.txt" />
+    <None Include="Assets/Externals/Gentlelands/Gentleland/SteampunkUI/ThirdPartyLicenses/Arvo Font License.txt" />
+    <None Include="Assets/Externals/Gentlelands/Gentleland/SteampunkUI/Fonts/BebasNeue/OFL.txt" />
+    <None Include="Assets/Externals/Gentlelands/Gentleland/SteampunkUI/Fonts/RobotoSlab/LICENSE.txt" />
+    <None Include="Assets/Externals/Gentlelands/Gentleland/SteampunkUI/Fonts/Arvo/OFL.txt" />
+    <None Include="Assets/Externals/Gentlelands/Gentleland/SteampunkUI/ThirdPartyLicenses/Environment Maps cc0.txt" />
+    <None Include="Assets/Externals/Gentlelands/Gentleland/SteampunkUI/ThirdPartyLicenses/BebasNeue Font License.txt" />
     <None Include="Assets/Externals/Warrior free set/Contact.txt" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.21f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -816,6 +824,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Gentleland.SteampunkUI.DemoAndExample.csproj">
+      <Project>{58c01dad-8c42-a156-17b6-a5753294fda5}</Project>
+      <Name>Gentleland.SteampunkUI.DemoAndExample</Name>
+    </ProjectReference>
+    <ProjectReference Include="Gentleland.Utils.SteampunkUI.csproj">
+      <Project>{02410e63-67b4-524d-34ff-bda6b0aca8cb}</Project>
+      <Name>Gentleland.Utils.SteampunkUI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
