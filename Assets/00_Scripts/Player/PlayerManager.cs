@@ -142,7 +142,7 @@ public class PlayerManager : Entity
         _currentState = PlayerState.Jump;
         _canJump = false;
 
-        PlayerMoveHandler.instance.PhysicsToJump(_jumpPower);
+        PlayerMoveHandler.instance.ApplyPhysicsJump(_jumpPower);
         
         _animator.Play("jump");
     }
@@ -159,7 +159,7 @@ public class PlayerManager : Entity
         }
         
         _playerMoveVelocity = new Vector2(__direction * _moveSpeed, 0);
-        PlayerMoveHandler.instance.PhysicsToMove(__direction * _moveSpeed);
+        PlayerMoveHandler.instance.ApplyPhysicsMove(__direction * _moveSpeed);
         
         if (_currentState == PlayerState.Jump) return;
         
@@ -176,7 +176,7 @@ public class PlayerManager : Entity
         _currentState = PlayerState.Idle;
         _canJump = true;
 
-        PlayerMoveHandler.instance.PhysicsToIdle();
+        PlayerMoveHandler.instance.ApplyPhysicsIdle();
         _animator.Play("Idle");
     }
     
